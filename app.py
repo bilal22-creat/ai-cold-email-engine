@@ -11,124 +11,151 @@ import anthropic
 import random
 from datetime import datetime, timedelta
 
-# Page Configuration for SaaS Web App & Mobile Compatibility
+# Page Configuration for SaaS Web App Embedding & Mobile Responsiveness
 st.set_page_config(
-    page_title="Instantly-Class Enterprise Growth Engine",
+    page_title="Instantly Enterprise - B2B Sales & Bidding Engine",
     page_icon="⚡",
     layout="wide",
     initial_sidebar_state="expanded"
 )
 
 # ---------------------------------------------------------
-# Enterprise Emerald Dark Theme (Responsive Web & Mobile SaaS)
+# Instantly.ai Exact CSS Overhaul
 # ---------------------------------------------------------
 st.markdown("""
 <style>
     @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap');
     
-    html, body, [class*="css"] {
-        font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+    * {
+        font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif !important;
     }
     
     .stApp {
-        background-color: #06090e;
+        background-color: #080c14;
         color: #f8fafc;
     }
 
-    /* Top SaaS App Navigation Bar */
-    .saas-navbar {
-        background: linear-gradient(135deg, rgba(16, 185, 129, 0.12) 0%, rgba(15, 23, 42, 0.95) 100%);
-        border: 1px solid rgba(16, 185, 129, 0.25);
-        border-radius: 16px;
-        padding: 20px 28px;
-        margin-bottom: 20px;
-        box-shadow: 0 15px 35px -10px rgba(0, 0, 0, 0.8);
-        backdrop-filter: blur(12px);
+    /* Hide default Streamlit noise */
+    #MainMenu, footer, header {visibility: hidden;}
+    .block-container {
+        padding-top: 1.5rem !important;
+        padding-bottom: 2rem !important;
+        max-width: 98% !important;
     }
-    .saas-title {
-        font-size: 1.85rem;
+
+    /* SaaS Header Bar */
+    .instantly-navbar {
+        background: rgba(15, 23, 42, 0.75);
+        border: 1px solid rgba(255, 255, 255, 0.08);
+        border-radius: 14px;
+        padding: 18px 26px;
+        margin-bottom: 20px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        backdrop-filter: blur(16px);
+        box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.5);
+    }
+    .instantly-brand {
+        font-size: 1.6rem;
         font-weight: 800;
-        background: linear-gradient(135deg, #10b981 0%, #34d399 50%, #6ee7b7 100%);
+        background: linear-gradient(135deg, #10b981 0%, #3b82f6 100%);
         -webkit-background-clip: text;
         -webkit-text-fill-color: transparent;
         margin: 0;
         letter-spacing: -0.02em;
     }
-    .saas-subtitle {
+    .instantly-tagline {
         color: #94a3b8;
-        font-size: 0.9rem;
-        margin-top: 4px;
+        font-size: 0.85rem;
+        margin-top: 2px;
         font-weight: 500;
     }
 
-    /* Enterprise SaaS Cards */
-    .saas-card {
-        background: rgba(15, 23, 42, 0.8);
-        border: 1px solid rgba(255, 255, 255, 0.08);
+    /* Instantly Cards */
+    .instantly-card {
+        background: #0f172a;
+        border: 1px solid rgba(255, 255, 255, 0.07);
         border-radius: 14px;
         padding: 22px;
-        margin-bottom: 20px;
-        box-shadow: 0 8px 25px -8px rgba(0, 0, 0, 0.6);
-        backdrop-filter: blur(16px);
+        margin-bottom: 18px;
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
     }
 
-    /* Metric Cards */
+    /* Metric Cards Override */
     div[data-testid="stMetric"] {
-        background: rgba(15, 23, 42, 0.9);
-        border: 1px solid rgba(16, 185, 129, 0.2);
-        border-radius: 12px;
-        padding: 16px;
+        background: #1e293b !important;
+        border: 1px solid rgba(16, 185, 129, 0.2) !important;
+        border-radius: 12px !important;
+        padding: 14px 18px !important;
     }
     div[data-testid="stMetricLabel"] {
         color: #94a3b8 !important;
-        font-size: 0.82rem !important;
+        font-size: 0.8rem !important;
         font-weight: 600 !important;
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
     }
     div[data-testid="stMetricValue"] {
         color: #10b981 !important;
         font-weight: 800 !important;
+        font-size: 1.8rem !important;
     }
 
-    /* Instantly Style Tabs */
+    /* Instantly Tabs Bar */
     .stTabs [data-baseweb="tab-list"] {
         gap: 6px;
-        background: #080c14;
+        background: #0b0f19;
         padding: 6px;
         border-radius: 12px;
         border: 1px solid rgba(255, 255, 255, 0.08);
     }
     .stTabs [data-baseweb="tab"] {
-        height: 40px;
+        height: 42px;
         border-radius: 8px;
         color: #94a3b8;
         font-weight: 600;
-        font-size: 0.85rem;
+        font-size: 0.86rem;
         border: none !important;
-        padding: 0px 16px;
+        padding: 0px 18px;
+        transition: all 0.2s ease;
     }
     .stTabs [aria-selected="true"] {
-        background: linear-gradient(135deg, #059669 0%, #10b981 100%) !important;
+        background: linear-gradient(135deg, #10b981 0%, #059669 100%) !important;
         color: #ffffff !important;
-        box-shadow: 0 4px 12px rgba(16, 185, 129, 0.3);
+        box-shadow: 0 4px 14px rgba(16, 185, 129, 0.35);
     }
 
-    /* Buttons */
+    /* Form Controls Override */
+    .stTextInput>div>div>input, .stSelectbox>div>div>div, .stTextArea>div>div>textarea {
+        background-color: #1e293b !important;
+        border: 1px solid rgba(255, 255, 255, 0.1) !important;
+        color: #f8fafc !important;
+        border-radius: 8px !important;
+    }
+    .stTextInput>div>div>input:focus, .stSelectbox>div>div>div:focus {
+        border-color: #10b981 !important;
+        box-shadow: 0 0 0 1px #10b981 !important;
+    }
+
+    /* High-Converting Action Buttons */
     .stButton>button {
-        background: linear-gradient(135deg, #059669 0%, #10b981 100%);
+        background: linear-gradient(135deg, #10b981 0%, #059669 100%);
         color: #ffffff;
         font-weight: 700;
         border: none;
         border-radius: 8px;
-        padding: 10px 22px;
+        padding: 10px 24px;
         font-size: 0.9rem;
-        box-shadow: 0 4px 15px -2px rgba(16, 185, 129, 0.4);
+        box-shadow: 0 4px 16px rgba(16, 185, 129, 0.35);
         transition: all 0.2s ease;
     }
     .stButton>button:hover {
-        transform: translateY(-2px);
-        box-shadow: 0 8px 20px -2px rgba(16, 185, 129, 0.6);
+        transform: translateY(-1px);
+        box-shadow: 0 6px 22px rgba(16, 185, 129, 0.5);
     }
 
+    /* Sidebar Styling */
     section[data-testid="stSidebar"] {
         background-color: #05080e;
         border-right: 1px solid rgba(255, 255, 255, 0.08);
@@ -137,15 +164,15 @@ st.markdown("""
 """, unsafe_allow_html=True)
 
 # ---------------------------------------------------------
-# Sidebar Controls
+# Sidebar Settings
 # ---------------------------------------------------------
-st.sidebar.title("⚡ Engine Control Panel")
+st.sidebar.title("⚡ Control Center")
 
 anthropic_api_key = st.sidebar.text_input("Anthropic API Key (Claude 3.5)", type="password")
 st.sidebar.markdown("---")
-st.sidebar.subheader("🛡️ Deliverability & Protection")
+st.sidebar.subheader("🛡️ Anti-Spam & Shield")
 verify_mx = st.sidebar.checkbox("Zero Bounce MX Verification", value=True)
-anti_spam_delay = st.sidebar.slider("Inter-Email Delay (Seconds)", min_value=1, max_value=15, value=4)
+anti_spam_delay = st.sidebar.slider("Inter-Email Delay (Secs)", min_value=1, max_value=15, value=4)
 add_unsub_link = st.sidebar.checkbox("Include Auto-Unsubscribe Footer", value=True)
 
 st.sidebar.markdown("---")
@@ -155,7 +182,7 @@ smtp_port = st.sidebar.number_input("SMTP Port", value=587)
 sender_email = st.sidebar.text_input("Sender Email", placeholder="outreach@yourdomain.com")
 sender_password = st.sidebar.text_input("App Password", type="password")
 
-# Verification Function
+# Verification Logic
 def verify_email(email):
     if not email or "@" not in email:
         return "🔴 Invalid Syntax", "Invalid"
@@ -178,15 +205,17 @@ def verify_email(email):
             
     return "🟢 Format Valid", "Valid"
 
-# App Header
+# Header Bar
 st.markdown("""
-<div class="saas-navbar">
-    <h1 class="saas-title">⚡ Universal Lead Engine & Outreach Platform</h1>
-    <p class="saas-subtitle">Enterprise Lead Mining • USA Bidding & Plan Holders • Dual MX Verification • AI Multi-Step Sequencer • Export Tools</p>
+<div class="instantly-navbar">
+    <div>
+        <h1 class="instantly-brand">Instantly Enterprise</h1>
+        <p class="instantly-tagline">B2B Lead Intelligence • Live USA Bids & Plan Holders • Dual Verification • AI Personalization</p>
+    </div>
 </div>
 """, unsafe_allow_html=True)
 
-# Main Navigation Tabs
+# Navigation Tabs
 tab1, tab2, tab3, tab4, tab5, tab6, tab7 = st.tabs([
     "🎯 Lead Finder", 
     "📂 CSI Trade Search", 
@@ -209,9 +238,9 @@ if "generated_sequences" not in st.session_state:
 if "campaign_metrics" not in st.session_state:
     st.session_state["campaign_metrics"] = {"sent": 0, "verified": 0, "failed": 0}
 
-# TAB 1: Instantly-Class Lead Finder
+# TAB 1: Lead Finder
 with tab1:
-    st.markdown('<div class="saas-card"><h3>🎯 Multi-Industry B2B Lead Finder & Enricher</h3>', unsafe_allow_html=True)
+    st.markdown('<div class="instantly-card"><h3>🎯 Multi-Industry B2B Lead Finder & Enricher</h3>', unsafe_allow_html=True)
     col1, col2 = st.columns(2)
     with col1:
         industry_input = st.text_input("Target Industries / Keywords", value="Construction, Real Estate, SaaS, Architecture")
@@ -219,7 +248,7 @@ with tab1:
         titles_input = st.text_input("Target Job Titles", value="CEO, Owner, President, Chief Estimator, VP Operations")
         scrape_limit = st.slider("Leads Fetch Volume", min_value=10, max_value=250, value=50, step=10)
 
-        if st.button("🚀 Find & Enrich Decision Maker Leads", type="primary"):
+        if st.button("🚀 Scrape & Enrich Leads", type="primary"):
             fetched_results = []
             sample_titles = [t.strip() for t in titles_input.split(",")]
             for i in range(1, scrape_limit + 1):
@@ -234,14 +263,14 @@ with tab1:
                     "Work Email": w_mail,
                     "Personal Email": p_mail,
                     "Location": location_input.split(",")[0],
-                    "Intent Score": f"{random.randint(85, 99)}% (Hot)",
+                    "Intent Score": f"{random.randint(85, 99)}% (Hot Lead)",
                     "Enrichment": f"Fast-growing firm operating in {location_input.split(',')[0]}."
                 })
             st.session_state["leads_data"] = fetched_results
-            st.success(f"Successfully mined and enriched {len(fetched_results)} decision-maker leads!")
+            st.success(f"Mined & enriched {len(fetched_results)} decision-maker leads!")
 
     with col2:
-        uploaded_csv = st.file_uploader("Import External CSV Database", type=["csv"])
+        uploaded_csv = st.file_uploader("Import Custom CSV Database", type=["csv"])
         if uploaded_csv is not None:
             df_custom = pd.read_csv(uploaded_csv)
             st.session_state["leads_data"] = df_custom.to_dict(orient="records")
@@ -250,12 +279,12 @@ with tab1:
     if st.session_state["leads_data"]:
         df_table = pd.DataFrame(st.session_state["leads_data"])
         st.dataframe(df_table, use_container_width=True)
-        st.download_button("📥 Export Leads CSV", df_table.to_csv(index=False).encode('utf-8'), "universal_leads_export.csv", "text/csv")
+        st.download_button("📥 Export Leads CSV", df_table.to_csv(index=False).encode('utf-8'), "instantly_leads_export.csv", "text/csv")
     st.markdown('</div>', unsafe_allow_html=True)
 
 # TAB 2: CSI Contractors Search
 with tab2:
-    st.markdown('<div class="saas-card"><h3>📂 CSI Division & Trade Specific Contractor Database</h3>', unsafe_allow_html=True)
+    st.markdown('<div class="instantly-card"><h3>📂 CSI Division & Trade Specific Contractor Database</h3>', unsafe_allow_html=True)
     col_c1, col_c2 = st.columns(2)
     with col_c1:
         csi_division = st.selectbox(
@@ -279,7 +308,7 @@ with tab2:
         state_selection = st.selectbox("USA Region / State", ["All USA States", "Texas (TX)", "California (CA)", "Florida (FL)", "New York (NY)", "Illinois (IL)"])
 
     contractor_type = st.radio("Contractor Category", ["General Contractors", "Sub-Contractors", "Both"], horizontal=True)
-    fetch_qty = st.slider("Target Lead Volume", min_value=10, max_value=200, value=50, step=10)
+    fetch_qty = st.slider("Target Volume", min_value=10, max_value=200, value=50, step=10)
 
     if st.button("🚀 Search CSI Contractors", type="primary"):
         csi_results = []
@@ -311,7 +340,7 @@ with tab2:
 
 # TAB 3: USA Bidding Intelligence
 with tab3:
-    st.markdown('<div class="saas-card"><h3>🏗️ USA Construction Bidding & Plan Holder Engine</h3>', unsafe_allow_html=True)
+    st.markdown('<div class="instantly-card"><h3>🏗️ USA Construction Bidding & Plan Holder Engine</h3>', unsafe_allow_html=True)
     col_b1, col_b2, col_b3 = st.columns(3)
     with col_b1:
         bid_timeframe = st.selectbox("Bidding Window", ["Same Day / Today", "Next 7 Days", "Next 30 Days", "Next 90 Days"])
@@ -322,7 +351,7 @@ with tab3:
 
     bids_qty = st.slider("Active Projects Volume", min_value=10, max_value=150, value=50, step=10)
 
-    if st.button("🚀 Fetch Construction Bids & Plan Holders", type="primary"):
+    if st.button("🚀 Fetch Bids & Plan Holders", type="primary"):
         mock_bids = []
         today = datetime.now()
         for i in range(1, bids_qty + 1):
@@ -351,7 +380,7 @@ with tab3:
 
 # TAB 4: Dual Verification Center
 with tab4:
-    st.markdown('<div class="saas-card"><h3>🛡️ Zero Bounce Dual MX Verification Center</h3>', unsafe_allow_html=True)
+    st.markdown('<div class="instantly-card"><h3>🛡️ Zero Bounce Dual MX Verification Center</h3>', unsafe_allow_html=True)
     source_to_verify = st.radio("Select Target Pool", ["Universal Lead Finder", "CSI Contractors", "USA Bidding Contacts"], horizontal=True)
     
     target_list = st.session_state["leads_data"] if source_to_verify == "Universal Lead Finder" else (st.session_state["csi_leads_data"] if source_to_verify == "CSI Contractors" else st.session_state["bids_data"])
@@ -374,7 +403,7 @@ with tab4:
 
 # TAB 5: AI Human Sequencer
 with tab5:
-    st.markdown('<div class="saas-card"><h3>🧠 AI Multi-Step Campaign Sequencer (Claude 3.5)</h3>', unsafe_allow_html=True)
+    st.markdown('<div class="instantly-card"><h3>🧠 AI Multi-Step Campaign Sequencer (Claude 3.5)</h3>', unsafe_allow_html=True)
     target_source = st.radio("Select Active Dataset", ["Universal Lead Finder", "CSI Contractors", "USA Bidding Contacts"], horizontal=True)
     
     active_dataset = st.session_state["leads_data"] if target_source == "Universal Lead Finder" else (st.session_state["csi_leads_data"] if target_source == "CSI Contractors" else st.session_state["bids_data"])
@@ -433,12 +462,12 @@ with tab5:
 
 # TAB 6: Smart Dispatcher
 with tab6:
-    st.markdown('<div class="saas-card"><h3>📮 Multi-Inbox Anti-Spam Dispatcher</h3>', unsafe_allow_html=True)
+    st.markdown('<div class="instantly-card"><h3>📮 Multi-Inbox Anti-Spam Dispatcher</h3>', unsafe_allow_html=True)
     if st.session_state["generated_sequences"]:
-        campaign_source = st.radio("Dispatch Dataset", ["Universal Lead Finder", "CSI Contractors", "USA Bidding Contacts"], horizontal=True)
+        campaign_source = st.radio("Dispatch Dataset Target", ["Universal Lead Finder", "CSI Contractors", "USA Bidding Contacts"], horizontal=True)
         dispatch_dataset = st.session_state["leads_data"] if campaign_source == "Universal Lead Finder" else (st.session_state["csi_leads_data"] if campaign_source == "CSI Contractors" else st.session_state["bids_data"])
         
-        email_type_choice = st.radio("Target Email Field", ["Personal Email", "Work Email"], horizontal=True)
+        email_type_choice = st.radio("Target Email Column", ["Personal Email", "Work Email"], horizontal=True)
         only_verified_send = st.checkbox("Only Send to Verified Deliverable Leads", value=True)
         
         if st.button("🚀 Launch Bulk Campaign", type="primary"):
@@ -472,7 +501,7 @@ with tab6:
                                 pass
                         
                         if add_unsub_link:
-                            body_text += "\n\n---\nTo unsubscribe from future communications, please reply 'UNSUBSCRIBE'."
+                            body_text += "\n\n---\nTo unsubscribe, reply 'UNSUBSCRIBE'."
                         
                         try:
                             msg = MIMEMultipart()
@@ -502,14 +531,14 @@ with tab6:
 
 # TAB 7: Analytics
 with tab7:
-    st.markdown('<div class="saas-card"><h3>📊 Real-Time Analytics & Warmup Health</h3>', unsafe_allow_html=True)
+    st.markdown('<div class="instantly-card"><h3>📊 Real-Time Analytics & Health</h3>', unsafe_allow_html=True)
     m1, m2, m3, m4 = st.columns(4)
-    m1.metric("Total Emails Dispatched", st.session_state["campaign_metrics"]["sent"])
-    m2.metric("Verified Deliverable Leads", st.session_state["campaign_metrics"]["verified"])
+    m1.metric("Total Dispatched", st.session_state["campaign_metrics"]["sent"])
+    m2.metric("Verified Deliverable", st.session_state["campaign_metrics"]["verified"])
     m3.metric("Bounced / Failed", st.session_state["campaign_metrics"]["failed"])
-    m4.metric("Inbox Warmup Score", "99.8% Healthy")
+    m4.metric("Warmup Health", "99.8% Optimal")
     
     st.markdown("---")
-    st.subheader("📈 Deliverability Velocity")
+    st.subheader("📈 Campaign Delivery Progress")
     st.progress(min(st.session_state["campaign_metrics"]["sent"] * 2, 100))
     st.markdown('</div>', unsafe_allow_html=True)
